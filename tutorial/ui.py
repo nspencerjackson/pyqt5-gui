@@ -9,7 +9,9 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QMessageBox
+from PyQt5.QtWidgets import QDialog, QMessageBox, QFileDialog
+from PyQt5.uic import loadUi
+import sys
 
 
 class Ui_MainWindow(object):
@@ -63,6 +65,7 @@ class Ui_MainWindow(object):
         self.actionSave.triggered.connect(lambda: self.click("Save was clicked"))
         self.actionCopy.triggered.connect(lambda: self.click("Copy was clicked"))
         self.actionPaste.triggered.connect(lambda: self.click("Paste was clicked"))
+        self.buttonOne.clicked.connect(self.butClick)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -86,6 +89,11 @@ class Ui_MainWindow(object):
 
     def click(self, text):
         self.labelOne.setText(text)
+        self.labelOne.adjustSize()
+
+    def butClick(self):
+        self.dir_path=QFileDialog.getOpenFileName(self,"Choose a Directory", "C:\\Users\\nspen\\Documents")
+        self.labelOne.setText(self.dir_path)
         self.labelOne.adjustSize()
 
 if __name__ == "__main__":
